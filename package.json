@@ -1,0 +1,22 @@
+{
+    "name": "express-angular-starter",
+    "version": "1.0.0",
+    "description": "A simple login demo using Express.js and Angular",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/vkandy/express-angular-starter.git"
+    },
+    "keywords": [
+        "login"
+    ],
+    "author": "Vijay Kandy",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/vkandy/express-angular-starter/issues"
+    },
+    "homepage": "https://github.com/vkandy/express-angular-starter#readme"
+}
