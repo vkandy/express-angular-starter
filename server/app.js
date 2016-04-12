@@ -10,8 +10,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json({limit: '1mb'}));
 app.use(methodOverride());
 
-app.get('/', function(req, res) {
-    res.send('Hello World!');
-});
+/**
+ * Mount routes at desired mount paths
+ */
+var router = express.Router();
+router.use('/auth', require('./routes/auth'));
+app.use(router);
 
 module.exports = app;

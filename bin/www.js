@@ -7,7 +7,7 @@ var app  = require('../server/app'),
  */
 var server = http.createServer(app);
 server.listen(3000, function() {
-    console.log('Example app listening on port 3000! \nUse Ctrl+C to shutdown.');
+    console.log('Example app listening on port 3000! Use Ctrl+C to shutdown.');
 });
 
 process.on('uncaughtException', function(err) {
@@ -22,3 +22,5 @@ process.on('uncaughtException', function(err) {
     console.log("Shutting down.");
     server.close()
 });
+
+module.exports = server;
