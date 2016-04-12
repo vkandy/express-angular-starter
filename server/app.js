@@ -9,6 +9,7 @@ var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json({limit: '1mb'}));
 app.use(methodOverride());
+app.use(express.static('build', {etag: false}));
 
 /**
  * Mount routes at desired mount paths
