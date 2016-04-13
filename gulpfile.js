@@ -57,11 +57,6 @@ gulp.task('js:vendor', function() {
     .pipe(order([
         "lodash.js",
         "jquery.js",
-        "jquery-*.js",
-        "jquery*-*.js",
-        "bootstrap.js",
-        "bootstrap-*.js",
-        "bootstrap*-*.js",
         "angular.js",
         "angular-*.js"
     ]))
@@ -80,7 +75,7 @@ gulp.task('js:vendor', function() {
 gulp.task('css', ['css:local', 'css:vendor']);
 
 gulp.task('css:local', function() {
-    return gulp.src('client/assets/**/*.css')
+    return gulp.src('client/app/**/*.css')
     .pipe(debug({title: 'local styles:'}))
     .pipe(sourcemaps.init())
     .pipe(concat('local.min.css'))
