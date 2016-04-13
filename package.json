@@ -45,6 +45,7 @@
         "run-sequence": "^1.1.5"
     },
     "devDependencies": {
+        "bower": "^1.7.9",
         "mocha": "^2.4.5",
         "should": "^8.3.0",
         "supertest": "^1.2.0"
