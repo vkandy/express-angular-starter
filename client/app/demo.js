@@ -7,6 +7,7 @@ angular.module('demo', [
     'ui.bootstrap',
     'ui.router',
     'demo.login',
+    'demo.dashboard',
     'demo.templates'
 ])
 
@@ -14,7 +15,7 @@ angular.module('demo', [
     function($rootScope, $state, $stateParams, AuthFactory) {
 
         $rootScope.$state = $state;
-        $rootScope.welcomeState = 'home';
+        $rootScope.welcomeState = 'dashboard';
         $rootScope.welcomeStateParams = {};
 
         $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams, fromState, fromStateParams) {
@@ -27,6 +28,7 @@ angular.module('demo', [
                 event.preventDefault();
                 $rootScope.welcomeState = toState;
                 $rootScope.welcomeStateParams = toStateParams;
+                return $state.go('signin');
             }
         });
     }
@@ -77,7 +79,8 @@ angular.module('demo', [
             parent: 'fluidlayout',
             views: {
                 'header': {
-                    templateUrl: 'layouts/fluid/header.html'
+                    templateUrl: 'layouts/fluid/header.html',
+                    controller: 'HeaderCtrl'
                 },
                 'menu': {
                     templateUrl: 'layouts/fluid/menu.html'
@@ -104,6 +107,15 @@ angular.module('demo', [
     function($scope, $rootScope, $state) {
     }
 ])
+.controller('HeaderCtrl', ['$scope', '$rootScope', '$state', 'AuthFactory',
+    function($scope, $rootScope, $state, AuthFactory) {
+        $scope.logout = function() {
+            AuthFactory.logout().then(function() {
+                $state.go('signin');
+            });
+        };
+    }
+])
 
 /**
  * Factories
@@ -120,7 +132,7 @@ angular.module('demo', [
             login: function(credentials) {
                 return $http({
                     method: 'POST',
-                    url: '/login',
+                    url: '/auth/login',
                     data: credentials,
                     headers: {'Content-Type': 'application/json'}
                 }).then(function(res) {
@@ -131,7 +143,7 @@ angular.module('demo', [
             logout: function() {
                 return $http({
                     method: 'POST',
-                    url: '/logout'
+                    url: '/auth/logout'
                 }).then(function() {
                     store.remove('STORAGETOKEN');
                 });
