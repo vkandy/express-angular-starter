@@ -13,6 +13,7 @@ var gulp            = require('gulp'),
     mainBowerFiles  = require('main-bower-files'),
     minifyCss       = require('gulp-minify-css'),
     order           = require("gulp-order"),
+    protractor      = require("gulp-protractor").protractor,
     rename          = require('gulp-rename'),
     runSequence     = require('run-sequence'),
     sourcemaps      = require('gulp-sourcemaps'),
@@ -143,6 +144,21 @@ gulp.task('html', function() {
     .pipe(inject(vendor, {name: 'vendor', ignorePath: 'build'}))
     .pipe(rename('index.html'))
     .pipe(gulp.dest('build'));
+});
+
+/**
+ * Tests
+ */
+gulp.task('e2e', function(done) {
+    var args = ['--baseUrl', 'http://localhost:3000'];
+    gulp.src(["./client/tests/e2e/*.js"])
+    .pipe(protractor({
+        configFile: "client/tests/protractor.conf.js",
+        args: args
+    }))
+    .on('error', function(e) {
+        throw e;
+    });
 });
 
 gulp.task('default', function(done) {
